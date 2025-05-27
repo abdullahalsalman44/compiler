@@ -8,12 +8,13 @@ import  '@angular/core';
   template:`<div class="container">
                 <div class="product-list">
                   <div
+
                     class="product"
                     *ngFor="let product of productsd"
                     [class.selected]="product === selectedProduct"
                     (click)="selectProduct(product)"
                   >
-                    <h4>{{hazem.product}}</h4>
+                    <h4>{{abd.product}}</h4>
                     <img [src]="product.image" alt="Product Image" class="product-image" />
                   </div>
                 </div>
@@ -140,7 +141,7 @@ this.selectedProduct = product;
 
 
 }
-}
+
 
 
 export class AppComponent{

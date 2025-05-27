@@ -12,7 +12,7 @@ import  '@angular/core';
                     [class.selected]="product === selectedProduct"
                     (click)="selectProduct(product)"
                   >
-                    <h4>{{hazem.product}}</h4>
+                    <h4>{{abd.product}}</h4>
                     <img [src]="product.image" alt="Product Image" class="product-image" />
                   </div>
                 </div>

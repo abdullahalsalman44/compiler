@@ -141,7 +141,7 @@ this.selectedProduct = product;
 
 
 }
-}
+
 
 
 export class AppComponent{

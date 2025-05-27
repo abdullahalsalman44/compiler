@@ -16,31 +16,23 @@ public class SemanticAnalyzer {
     public void analyze() {
         List<Row> rows = symbolTable.getRows();
 
-        List<String> seenClasses = new ArrayList<>();
-        Set<String> seenFunctions = new HashSet<>();
-        Set<String> seenParameters = new HashSet<>();
+            Set<String> classNames = new HashSet<>();
+            Set<String> duplicates = new HashSet<>();
 
-        for (Row row : rows)
-        {
-            if(row.getType().equals("ClassName"))
-            seenClasses.add(row.getValue());
-        }
-        System.out.println(seenClasses);
-        for (Row row : rows) {
-            String type = row.getType();
-            String value = row.getValue();
-
-            if(type == "ClassName"){
-                for (int i=0 ; i<seenClasses.size() ; i++){
-                    if(Objects.equals(seenClasses.get(i), value)){
-                        seenClasses.remove(i);
+            for (Row row : rows) {
+                if ("ClassName".equals(row.getType())) {
+                    String className = row.getValue();
+                    if (!classNames.add(className)) {
+                        duplicates.add(className);
                     }
                 }
-                if(seenClasses.contains(value)){
-                    System.err.println("Semantic Error: Duplicate class definition '" + value + "'");
-                }
             }
-        }
+
+            for (String dup : duplicates) {
+                System.err.println("Semantic Error: Duplicate class definition '" + dup + "'");
+            }
+
+
 
         if(!checkSelectoreExists()){
             System.err.println("Semantic Error: No Selector");
