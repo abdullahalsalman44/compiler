@@ -46,6 +46,9 @@ public class SemanticAnalyzer {
             System.err.println("Semantic Error: No Selector");
         }
 
+        if (!checkDirectiveAray()){
+            System.err.println("Semantic Error: Array not found");
+        }
 
     }
 
@@ -62,5 +65,34 @@ public class SemanticAnalyzer {
         }else {
             return  true;
         }
+    }
+
+    public  boolean checkDirectiveAray(){
+        for (Row row : symbolTable.getRows()){
+            int counter=0;
+            if(row.getType().equals("directive") ){
+                if(row.getValue().equals("*ngFor")){
+                    String attValue = row.getAttributeValue();
+                    int indexOf = attValue.indexOf("of");
+
+                    if(indexOf != -1){
+                        String arrayName = attValue.substring(indexOf + 3 , attValue.length()-1);
+                        for (Row row1 : symbolTable.getRows()){
+                            if(row1.getType().equals("array")){
+                                System.out.println(arrayName);
+                                if(row1.getValue().equals(arrayName)){
+                                    System.out.println("dfvuehfe");
+                                    counter++;
+                                }
+                            }
+                        }
+                        if (counter == 0){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

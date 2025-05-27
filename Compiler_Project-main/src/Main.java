@@ -12,7 +12,7 @@ import java.io.IOException;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 public class Main {
     public static void main(String[] args) throws IOException {
-        File folder = new File("C:/Users/Acer/Desktop/compiler/Compiler_Project-main/Compiler_Project-main/Compiler_Project-main/src/Test");
+        File folder = new File("D:/compiler2/compiler/Compiler_Project-main/src/Test");
         File[] files = folder.listFiles();
         for (int i = 0; i < files.length; i++) {
             String source = files[i].getPath();
