@@ -12,7 +12,7 @@ public class SemanticAnalyzer {
     public SemanticAnalyzer(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
     }
-
+//
     public void analyze() {
         List<Row> rows = symbolTable.getRows();
 
