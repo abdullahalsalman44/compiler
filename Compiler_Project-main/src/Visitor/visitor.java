@@ -644,7 +644,7 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
             Row row = new Row();
             row.setType("Selector");
             row.setValue(ctx.Selector().getText());
-            String selectorValue = ctx.getText().split(":")[0];
+            String selectorValue = ctx.getText().split(":")[1];
             row.setAttributeValue(selectorValue);
             this.symbolTable.getRows().add(row);
 

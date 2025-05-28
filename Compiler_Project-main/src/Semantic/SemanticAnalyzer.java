@@ -8,11 +8,12 @@ import java.util.*;
 public class SemanticAnalyzer {
 
     private final SymbolTable symbolTable;
-
+    Set<String> selectors = new HashSet<>();
+    Set<String> duplicatedSelectors = new HashSet<>();
     public SemanticAnalyzer(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
     }
-//
+
     public void analyze() {
         List<Row> rows = symbolTable.getRows();
 
@@ -23,7 +24,7 @@ public class SemanticAnalyzer {
                 if ("ClassName".equals(row.getType())) {
                     String className = row.getValue();
                     if (!classNames.add(className)) {
-                        duplicates.add(className);
+                         duplicates.add(className);
                     }
                 }
             }
@@ -41,6 +42,14 @@ public class SemanticAnalyzer {
         if (!checkDirectiveAray()){
             System.err.println("Semantic Error: Array not found");
         }
+
+        for (Row row : rows){
+            if("Selector".equals(row.getType())){
+                if(checkSelectorDuplication(row))
+                    System.err.println("Semantic Error: Duplicate selector definition '" + row.getAttributeValue() + "'");
+            }
+        }
+
 
     }
 
@@ -73,7 +82,6 @@ public class SemanticAnalyzer {
                             if(row1.getType().equals("array")){
                                 System.out.println(arrayName);
                                 if(row1.getValue().equals(arrayName)){
-                                    System.out.println("dfvuehfe");
                                     counter++;
                                 }
                             }
@@ -86,5 +94,13 @@ public class SemanticAnalyzer {
             }
         }
         return true;
+    }
+
+    public  boolean checkSelectorDuplication(Row row) {
+                String selectorValue = row.getAttributeValue();
+                if (!selectors.add(selectorValue)) {
+                    duplicatedSelectors.add(selectorValue);
+                }
+        return !duplicatedSelectors.isEmpty();
     }
 }
