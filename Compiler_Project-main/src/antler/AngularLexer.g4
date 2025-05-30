@@ -15,6 +15,10 @@ Standalone                 : 'standalone';
 Imports                    : 'imports';
 Template                   : 'template';
 Styles                     : 'styles';
+NgModule : 'NgModule' ;
+Injectable : 'Injectable' ;
+Pipe : 'Pipe' ;
+
 SemiColon                  : ';';
 OpenBracket                : '[';
 CloseBracket               : ']';
@@ -103,6 +107,14 @@ Of         : 'of';
 NullLiteral: 'null';
 BooleanLiteral: 'true' | 'false';
 
+Map:'map';
+NgIfDirective : '*ngIf' ;
+NgForDirective : '*ngFor' ;
+Bootstrap : 'bootstrap';
+Providers : 'providers';
+Exports   : 'exports';
+Declarations : 'declarations';
+
 
 StringLiteral:
     ('"' DoubleStringCharacter* '"' | '\'' SingleStringCharacter* '\'')
@@ -122,7 +134,6 @@ Interface    : 'interface'  ;
 Package      : 'package'   ;
 Protected    : 'protected'  ;
 Static       : 'static'     ;
-Map:'map';
 
 
 DecimalLiteral:
@@ -225,11 +236,6 @@ fragment CapitalLetter : [A-Z];
 
 fragment Lowercase : [a-z];
 
-NgIfDirective : '*ngIf' ;
-NgForDirective : '*ngFor' ;
-NgModule : 'NgModule' ;
-Injectable : 'Injectable' ;
-Pipe : 'Pipe' ;
 
 Qut:'"';
 OPEN_MUSTACHE : '{{' ;

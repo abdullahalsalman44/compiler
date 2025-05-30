@@ -6,7 +6,6 @@ import java.util.List;
 public class  ClassDeclaration  extends  Statment{
     String ClassName;
     Export ClassExport ;
-
      ClassBody classBody;
 
     public ClassBody getClassBody() {

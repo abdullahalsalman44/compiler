@@ -1,4 +1,4 @@
-// Generated from C:/Users/hazem/OneDrive/Desktop/4/compiler_test/CompilerProject/src/antler/AngularParser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/shaza/IdeaProjects/compiler/Compiler_Project-main/src/antler/AngularParser.g4 by ANTLR 4.13.2
 package antler;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -143,6 +143,12 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComponentDeclaration(AngularParser.ComponentDeclarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AngularParser#classDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassDeclaration(AngularParser.ClassDeclarationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AngularParser#componentAttributes}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -184,12 +190,6 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStylesDeclaration(AngularParser.StylesDeclarationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AngularParser#classDeclaration}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitClassDeclaration(AngularParser.ClassDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AngularParser#classBody}.
 	 * @param ctx the parse tree
@@ -274,4 +274,46 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLiteral(AngularParser.LiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#ngModuleDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNgModuleDeclaration(AngularParser.NgModuleDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#ngModuleAttributes}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNgModuleAttributes(AngularParser.NgModuleAttributesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#ngModuleAttribute}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNgModuleAttribute(AngularParser.NgModuleAttributeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#declarationsDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclarationsDeclaration(AngularParser.DeclarationsDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#exportsDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExportsDeclaration(AngularParser.ExportsDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#providersDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProvidersDeclaration(AngularParser.ProvidersDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#bootstrapDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBootstrapDeclaration(AngularParser.BootstrapDeclarationContext ctx);
 }

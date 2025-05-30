@@ -1,4 +1,5 @@
 package Visitor;
+
 import AST.*;
 import Semantic.SemanticAnalyzer;
 import SymbolTable.Row;
@@ -6,21 +7,19 @@ import SymbolTable.SymbolTable;
 import antler.AngularParser;
 import antler.AngularParserBaseVisitor;
 
-public class visitor  extends AngularParserBaseVisitor {
-public  SymbolTable symbolTable=new SymbolTable();
-
+public class visitor extends AngularParserBaseVisitor {
+    public SymbolTable symbolTable = new SymbolTable();
+    private String currentModuleName = null;
 
 
     @Override
-    public Program visitProgram(AngularParser.ProgramContext ctx){
+    public Program visitProgram(AngularParser.ProgramContext ctx) {
         Program program = new Program();
-        if(ctx.importStatement()!=null)
-        {
+        if (ctx.importStatement() != null) {
             program.setImportStatement(visitImportStatement(ctx.importStatement()));
         }
         for (int i = 0; i < ctx.statment().size(); i++) {
-            if (ctx.statment(i)!=null)
-            {
+            if (ctx.statment(i) != null) {
                 program.getSourceElement().add(visitStatment(ctx.statment(i)));
             }
         }
@@ -33,11 +32,10 @@ public  SymbolTable symbolTable=new SymbolTable();
     }
 
     @Override
-    public ImportStatmente visitImportStatement(AngularParser.ImportStatementContext ctx)
-    { ImportStatmente importStatement = new ImportStatmente ();
+    public ImportStatmente visitImportStatement(AngularParser.ImportStatementContext ctx) {
+        ImportStatmente importStatement = new ImportStatmente();
         for (int i = 0; i < ctx.importFromBlock().size(); i++) {
-            if (ctx.importFromBlock(i)!=null)
-            {
+            if (ctx.importFromBlock(i) != null) {
                 importStatement.getImportFromBlocks().add(visitImportFromBlock(ctx.importFromBlock(i)));
             }
         }
@@ -46,61 +44,61 @@ public  SymbolTable symbolTable=new SymbolTable();
     }
 
     @Override
-    public ImportFromBlock visitImportFromBlock(AngularParser.ImportFromBlockContext ctx)
-    {
-        ImportFromBlock importFromBlock = new ImportFromBlock () ;
+    public ImportFromBlock visitImportFromBlock(AngularParser.ImportFromBlockContext ctx) {
+        ImportFromBlock importFromBlock = new ImportFromBlock();
 
 
-        if (ctx.Identifier()!= null){
-            importFromBlock.setIdentifier(ctx.Identifier().getText());}
-        if (ctx.moduleItems()!=null)
-        {
-            importFromBlock.setModuleItems(visitModuleItems(ctx.moduleItems()));}
+        if (ctx.Identifier() != null) {
+            importFromBlock.setIdentifier(ctx.Identifier().getText());
+        }
+        if (ctx.moduleItems() != null) {
+            importFromBlock.setModuleItems(visitModuleItems(ctx.moduleItems()));
+        }
 
-        if (ctx.StringLiteral()!= null){
-            importFromBlock.setImportFrom(ctx.StringLiteral().getText());}
+        if (ctx.StringLiteral() != null) {
+            importFromBlock.setImportFrom(ctx.StringLiteral().getText());
+        }
 
-        return  importFromBlock;
+        return importFromBlock;
     }
 
     @Override
     public ModuleItems visitModuleItems(AngularParser.ModuleItemsContext ctx) {
-        ModuleItems moduleItems = new ModuleItems () ;
+        ModuleItems moduleItems = new ModuleItems();
 
-        if (ctx.Component()!= null)
+        if (ctx.Component() != null)
             moduleItems.setComponent(ctx.Component().getText());
 
-        if (ctx.Identifier(0)!= null)
+        if (ctx.Identifier(0) != null)
             moduleItems.setIdentifier1(ctx.Identifier(0).getText());
-        if (ctx.Identifier(1)!= null)
+        if (ctx.Identifier(1) != null)
             moduleItems.setIdentifier2(ctx.Identifier(1).getText());
-        return moduleItems ;
+        return moduleItems;
     }
 
 
     @Override
     public Statment visitStatment(AngularParser.StatmentContext ctx) {
 
-        Statment statement= new Statment();
-        if(ctx.functionDeclaration()!=null)
-        {
+        Statment statement = new Statment();
+
+        if (ctx.functionDeclaration() != null) {
             statement.setFunctionDeclaration(visitFunctionDeclaration(ctx.functionDeclaration()));
         }
-        if(ctx.variableStatement()!=null)
-        {
+        if (ctx.variableStatement() != null) {
             statement.setVariableStatement(visitVariableStatement(ctx.variableStatement()));
         }
-        if(ctx.expressionStatement()!=null)
-        {
+        if (ctx.expressionStatement() != null) {
             statement.setExpressionStatement(visitExpressionStatement(ctx.expressionStatement()));
         }
-        if(ctx.componentDeclaration()!=null)
-        {
+        if (ctx.componentDeclaration() != null) {
             statement.setComponentDeclaration(visitComponentDeclaration(ctx.componentDeclaration()));
         }
-        if(ctx.classDeclaration()!=null)
-        {
+        if (ctx.classDeclaration() != null) {
             statement.setClassDeclaration(visitClassDeclaration(ctx.classDeclaration()));
+        }
+        if (ctx.ngModuleDeclaration() != null) {
+            statement.setNgModuleDeclaration(visitNgModuleDeclaration(ctx.ngModuleDeclaration()));
         }
         return statement;
     }
@@ -108,27 +106,26 @@ public  SymbolTable symbolTable=new SymbolTable();
 
     @Override
     public ComponentDeclaration visitComponentDeclaration(AngularParser.ComponentDeclarationContext ctx) {
-ComponentDeclaration componentDeclaration=new ComponentDeclaration();
-if(ctx.componentAttributes()!=null){
-    componentDeclaration.setComponentAttributes(visitComponentAttributes(ctx.componentAttributes()));
-}
-return componentDeclaration;
+        ComponentDeclaration componentDeclaration = new ComponentDeclaration();
+        if (ctx.componentAttributes() != null) {
+            componentDeclaration.setComponentAttributes(visitComponentAttributes(ctx.componentAttributes()));
+        }
+        return componentDeclaration;
     }
 
     @Override
     public Template visitTemplateDeclaration(AngularParser.TemplateDeclarationContext ctx) {
-        Template template=new Template();
-if(ctx.Template()!=null)
-{
-    template.setTemplate(ctx.Template().getText());
-    Row row = new Row();
-    row.setType("Template");
-    row.setValue(ctx.Template().getText());
-    this.symbolTable.getRows().add(row);
-}
-if(ctx.Colon()!=null){
-    template.setColon(ctx.Colon().getText());
-}
+        Template template = new Template();
+        if (ctx.Template() != null) {
+            template.setTemplate(ctx.Template().getText());
+            Row row = new Row();
+            row.setType("Template");
+            row.setValue(ctx.Template().getText());
+            this.symbolTable.getRows().add(row);
+        }
+        if (ctx.Colon() != null) {
+            template.setColon(ctx.Colon().getText());
+        }
         if (ctx.htmlElements() != null) {
             template.setHtmlElementsNode(visitHtmlElements(ctx.htmlElements()));
         }
@@ -137,32 +134,32 @@ if(ctx.Colon()!=null){
 
     @Override
     public ComponentAttributes visitComponentAttributes(AngularParser.ComponentAttributesContext ctx) {
-   ComponentAttributes componentAttributes=new ComponentAttributes();
+        ComponentAttributes componentAttributes = new ComponentAttributes();
         for (int i = 0; i < ctx.componentAttribute().size(); i++) {
             if (ctx.componentAttribute(i) != null) {
                 componentAttributes.getComponentAttribute().add(visitComponentAttribute(ctx.componentAttribute(i)));
             }
         }
-   return componentAttributes;
+        return componentAttributes;
     }
 
     @Override
     public ComponentAttribute visitComponentAttribute(AngularParser.ComponentAttributeContext ctx) {
-        ComponentAttribute componentAttribute=new ComponentAttribute();
-        if(ctx.templateDeclaration()!=null){
+        ComponentAttribute componentAttribute = new ComponentAttribute();
+        if (ctx.templateDeclaration() != null) {
             componentAttribute.setTemplate(visitTemplateDeclaration(ctx.templateDeclaration()));
 
         }
-        if(ctx.selectorDeclaration()!=null){
+        if (ctx.selectorDeclaration() != null) {
             componentAttribute.setSelector(visitSelectorDeclaration(ctx.selectorDeclaration()));
         }
-        if(ctx.standaloneDeclaration()!=null){
+        if (ctx.standaloneDeclaration() != null) {
             componentAttribute.setStandalone(visitStandaloneDeclaration(ctx.standaloneDeclaration()));
         }
-        if(ctx.importsDeclaration()!=null){
+        if (ctx.importsDeclaration() != null) {
             componentAttribute.setImports(visitImportsDeclaration(ctx.importsDeclaration()));
         }
-        if(ctx.stylesDeclaration()!=null){
+        if (ctx.stylesDeclaration() != null) {
             componentAttribute.setStyles(visitStylesDeclaration(ctx.stylesDeclaration()));
         }
 
@@ -171,7 +168,7 @@ if(ctx.Colon()!=null){
 
     @Override
     public HtmlElementsNode visitHtmlElements(AngularParser.HtmlElementsContext ctx) {
-        HtmlElementsNode   htmlElementsNode= new HtmlElementsNode();
+        HtmlElementsNode htmlElementsNode = new HtmlElementsNode();
         for (int i = 0; i < ctx.htmlElement().size(); i++) {
             if (ctx.htmlElement(i) != null) {
                 htmlElementsNode.getHtmlElements().add(visitHtmlElement(ctx.htmlElement(i)));
@@ -181,11 +178,9 @@ if(ctx.Colon()!=null){
     }
 
     @Override
-    public HtmlElementNode visitHtmlElement(AngularParser.HtmlElementContext ctx)
-    {
-        HtmlElementNode htmlElementNode= new HtmlElementNode();
-        if(ctx.Identifier(0)!= null)
-        {
+    public HtmlElementNode visitHtmlElement(AngularParser.HtmlElementContext ctx) {
+        HtmlElementNode htmlElementNode = new HtmlElementNode();
+        if (ctx.Identifier(0) != null) {
             htmlElementNode.setTagName(ctx.Identifier(0).getText());
         }
         for (int i = 0; i < ctx.htmlAttribute().size(); i++) {
@@ -194,18 +189,17 @@ if(ctx.Colon()!=null){
             }
 
         }
-        if (ctx.htmlContent()!=null)
-        {
+        if (ctx.htmlContent() != null) {
             htmlElementNode.setContent(visitHtmlContent(ctx.htmlContent()));
         }
-        if(ctx.Identifier(1)!= null)
-        {
+        if (ctx.Identifier(1) != null) {
             htmlElementNode.setTagNameClose(ctx.Identifier(1).getText());
         }
 
         return htmlElementNode;
 
     }
+
     @Override
     public HtmlAttributeNode visitHtmlAttribute(AngularParser.HtmlAttributeContext ctx) {
         HtmlAttributeNode htmlAttributeNode = new HtmlAttributeNode();
@@ -229,7 +223,7 @@ if(ctx.Colon()!=null){
             }
         }
 
-        if(ctx.directive() !=null){
+        if (ctx.directive() != null) {
             HtmlAttributeNode htmlAttributeNode1 = new HtmlAttributeNode();
             HtmlAttributeValueNode htmlAttributeValueNode = new HtmlAttributeValueNode();
             Directive directive = new Directive();
@@ -262,12 +256,12 @@ if(ctx.Colon()!=null){
         }
 
 
-
         return htmlAttributeNode;
     }
+
     @Override
     public HtmlContentNode visitHtmlContent(AngularParser.HtmlContentContext ctx) {
-        HtmlContentNode htmlContentNode= new HtmlContentNode();
+        HtmlContentNode htmlContentNode = new HtmlContentNode();
         for (int i = 0; i < ctx.htmlElement().size(); i++) {
             if (ctx.htmlElement(i) != null) {
                 htmlContentNode.getHtmlContent().add(visitHtmlElement(ctx.htmlElement(i)));
@@ -278,7 +272,7 @@ if(ctx.Colon()!=null){
                 htmlContentNode.getExpContent().add(visitSingleExpression(ctx.singleExpression(i)));
             }
         }
-        return  htmlContentNode;
+        return htmlContentNode;
     }
 
     @Override
@@ -392,11 +386,9 @@ if(ctx.Colon()!=null){
             }
 
 
-
             return expression;
         }
 
-        // Ternary or colon-style expression
         if (ctx.singleExpression().size() == 2 && ctx.Colon() != null) {
             Expression left = visitSingleExpression(ctx.singleExpression(0));
             Expression right = visitSingleExpression(ctx.singleExpression(1));
@@ -423,17 +415,18 @@ if(ctx.Colon()!=null){
     public LiteralExpression visitLiteral(AngularParser.LiteralContext ctx) {
         LiteralExpression literalExpression = new LiteralExpression();
         if (ctx.BooleanLiteral() != null) {
-            literalExpression.setBooleanLiteral(Boolean.parseBoolean(ctx.BooleanLiteral().getText()));}
-        else if (ctx.DecimalLiteral() != null) {
-            literalExpression.setDecimalLiteral(Double.parseDouble(ctx.DecimalLiteral().getText()));}
-        else if (ctx.StringLiteral() != null) {
-            literalExpression.setStringLiteral(ctx.StringLiteral().getText());}
-
-        else {
-            literalExpression.setNullLiteral(null);}
+            literalExpression.setBooleanLiteral(Boolean.parseBoolean(ctx.BooleanLiteral().getText()));
+        } else if (ctx.DecimalLiteral() != null) {
+            literalExpression.setDecimalLiteral(Double.parseDouble(ctx.DecimalLiteral().getText()));
+        } else if (ctx.StringLiteral() != null) {
+            literalExpression.setStringLiteral(ctx.StringLiteral().getText());
+        } else {
+            literalExpression.setNullLiteral(null);
+        }
 
         return literalExpression;
     }
+
     @Override
     public ObjectLiteral visitObjectLiteral(AngularParser.ObjectLiteralContext ctx) {
         ObjectLiteral objectLiteral = new ObjectLiteral();
@@ -445,14 +438,15 @@ if(ctx.Colon()!=null){
         return objectLiteral;
 
     }
+
     @Override
     public PropertyAssignment visitPropertyAssignment(AngularParser.PropertyAssignmentContext ctx) {
         PropertyAssignment propertyAssignment = new PropertyAssignment();
-        if (ctx.singleExpression(0)!= null) {
+        if (ctx.singleExpression(0) != null) {
             Expression key = visitSingleExpression(ctx.singleExpression(0));
             propertyAssignment.setKey(key);
         }
-        if (ctx.singleExpression(1)!= null) {
+        if (ctx.singleExpression(1) != null) {
             Expression value = visitSingleExpression(ctx.singleExpression(1));
             propertyAssignment.setValue(value);
         }
@@ -473,24 +467,22 @@ if(ctx.Colon()!=null){
         row.setValue(ctx.getText());
         return arrayLiteral;
     }
+
     @Override
     public FunctionDeclaration visitFunctionDeclaration(AngularParser.FunctionDeclarationContext ctx) {
         FunctionDeclaration functionDeclaration = new FunctionDeclaration();
-        if(ctx.Export()!=null)
-        {
+        if (ctx.Export() != null) {
             functionDeclaration.setFunctionExport(ctx.Export().getText());
         }
-        if(ctx.Identifier()!=null)
-        {
+        if (ctx.Identifier() != null) {
             functionDeclaration.setFunctionName(ctx.Identifier().getText());
-           Row row=new Row();
+            Row row = new Row();
             row.setType("FunctionName");
             row.setValue(functionDeclaration.getFunctionName());
             this.symbolTable.getRows().add(row);
 
         }
-        if(ctx.Identifier()!=null)
-        {
+        if (ctx.Identifier() != null) {
             functionDeclaration.setFunctionName(ctx.Identifier().getText());
 
         }
@@ -499,8 +491,7 @@ if(ctx.Colon()!=null){
                 functionDeclaration.getParameters().add(visitSingleExpression(ctx.singleExpression(i)));
             }
         }
-        if (!ctx.singleExpression().isEmpty())
-        {
+        if (!ctx.singleExpression().isEmpty()) {
             Row row = new Row();
             row.setType("functionParameters");
             row.setValue(functionDeclaration.getParameters().toString());
@@ -511,8 +502,7 @@ if(ctx.Colon()!=null){
                 functionDeclaration.getBody().add(visitStatment(ctx.statment(i)));
             }
         }
-        if(ctx.exportStatement()!=null)
-        {
+        if (ctx.exportStatement() != null) {
             functionDeclaration.setEx(visitExportStatement(ctx.exportStatement()));
         }
         return functionDeclaration;
@@ -531,6 +521,7 @@ if(ctx.Colon()!=null){
         return variableStatement;
 
     }
+
     @Override
     public VariableDeclaration visitVariableDeclaration(AngularParser.VariableDeclarationContext ctx) {
         VariableDeclaration variableDeclaration = new VariableDeclaration();
@@ -542,6 +533,7 @@ if(ctx.Colon()!=null){
         }
         return variableDeclaration;
     }
+
     @Override
     public Assignable visitAssignable(AngularParser.AssignableContext ctx) {
         Assignable assignable = new Assignable();
@@ -571,9 +563,10 @@ if(ctx.Colon()!=null){
 
         return assignable;
     }
+
     @Override
     public ExpressionStatement visitExpressionStatement(AngularParser.ExpressionStatementContext ctx) {
-        ExpressionStatement expressionStatement= new ExpressionStatement();
+        ExpressionStatement expressionStatement = new ExpressionStatement();
         for (int i = 0; i < ctx.singleExpression().size(); i++) {
             if (ctx.singleExpression(i) != null) {
                 expressionStatement.getExpressions().add(visitSingleExpression(ctx.singleExpression(i)));
@@ -582,6 +575,7 @@ if(ctx.Colon()!=null){
         return expressionStatement;
 
     }
+
     @Override
     public Export visitExportStatement(AngularParser.ExportStatementContext ctx) {
         Export export = new Export();
@@ -593,36 +587,36 @@ if(ctx.Colon()!=null){
 
     @Override
     public ClassDeclaration visitClassDeclaration(AngularParser.ClassDeclarationContext ctx) {
-        ClassDeclaration classDeclaration=new ClassDeclaration();
-if(ctx.Identifier()!=null) {
-    classDeclaration.setClassName(ctx.Identifier().getText());
-    Row row = new Row();
-    row.setType("ClassName");
-    row.setValue(classDeclaration.getClassName());
-    this.symbolTable.getRows().add(row);
-}
-   if(ctx.classBody()!=null){
-       classDeclaration.setClassBody(visitClassBody(ctx.classBody()));
-   }
+        ClassDeclaration classDeclaration = new ClassDeclaration();
+        if (ctx.Identifier() != null) {
+            classDeclaration.setClassName(ctx.Identifier().getText());
+            Row row = new Row();
+            row.setType("ClassName");
+            row.setValue(classDeclaration.getClassName());
+            this.symbolTable.getRows().add(row);
+        }
+        if (ctx.classBody() != null) {
+            classDeclaration.setClassBody(visitClassBody(ctx.classBody()));
+        }
         return classDeclaration;
     }
 
     @Override
     public ClassBody visitClassBody(AngularParser.ClassBodyContext ctx) {
-        ClassBody classBody=new ClassBody();
+        ClassBody classBody = new ClassBody();
 
-for (int i=0;i<ctx.singleExpression().size();i++) {
-    if (ctx.singleExpression(i) != null) {
-        classBody.getExpressions().add(visitSingleExpression(ctx.singleExpression(i)));
-    }
-}
+        for (int i = 0; i < ctx.singleExpression().size(); i++) {
+            if (ctx.singleExpression(i) != null) {
+                classBody.getExpressions().add(visitSingleExpression(ctx.singleExpression(i)));
+            }
+        }
 
         return classBody;
     }
 
     @Override
     public MustachExpression visitMustacheExpression(AngularParser.MustacheExpressionContext ctx) {
-        MustachExpression mustachExpression=new MustachExpression();
+        MustachExpression mustachExpression = new MustachExpression();
         for (int i = 0; i < ctx.singleExpression().size(); i++) {
             if (ctx.singleExpression(i) != null) {
 
@@ -634,11 +628,11 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
 
     @Override
     public Selector visitSelectorDeclaration(AngularParser.SelectorDeclarationContext ctx) {
-        Selector selector=new Selector();
-        if(ctx.Colon()!=null){
+        Selector selector = new Selector();
+        if (ctx.Colon() != null) {
             selector.setColon(ctx.Colon().getText());
         }
-        if(ctx.Selector()!=null){
+        if (ctx.Selector() != null) {
             selector.setSelector(ctx.Selector().getText());
 
             Row row = new Row();
@@ -650,7 +644,7 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
 
 
         }
-        if(ctx.StringLiteral()!=null){
+        if (ctx.StringLiteral() != null) {
             selector.setApp_root(ctx.StringLiteral().getText());
         }
         return selector;
@@ -658,34 +652,34 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
 
     @Override
     public Standalone visitStandaloneDeclaration(AngularParser.StandaloneDeclarationContext ctx) {
-  Standalone standalone=new Standalone();
-  if(ctx.Standalone()!=null){
-      standalone.setStandalone(ctx.Standalone().getText());
+        Standalone standalone = new Standalone();
+        if (ctx.Standalone() != null) {
+            standalone.setStandalone(ctx.Standalone().getText());
 
-      Row row = new Row();
-      row.setType("Standalone");
-      row.setValue(ctx.Standalone().getText());
-      this.symbolTable.getRows().add(row);
+            Row row = new Row();
+            row.setType("Standalone");
+            row.setValue(ctx.Standalone().getText());
+            this.symbolTable.getRows().add(row);
 
-  }
-        if(ctx.Colon()!=null){
+        }
+        if (ctx.Colon() != null) {
             standalone.setColon(ctx.Colon().getText());
         }
-        if(ctx.BooleanLiteral()!=null){
+        if (ctx.BooleanLiteral() != null) {
             String booleanText = ctx.BooleanLiteral().getText();
             boolean booleanValue = Boolean.parseBoolean(booleanText);
             standalone.setBooleanvalue(booleanValue);
         }
-  return standalone;
+        return standalone;
     }
 
     @Override
     public Imports visitImportsDeclaration(AngularParser.ImportsDeclarationContext ctx) {
-        Imports imports=new Imports();
-        if(ctx.Colon()!=null){
+        Imports imports = new Imports();
+        if (ctx.Colon() != null) {
             imports.setColon(ctx.Colon().getText());
         }
-        if(ctx.Imports()!=null){
+        if (ctx.Imports() != null) {
             imports.setImports(ctx.Imports().getText());
 
             Row row = new Row();
@@ -693,7 +687,7 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
             row.setValue(ctx.Imports().getText());
             this.symbolTable.getRows().add(row);
         }
-        if(ctx.arrayLiteral()!=null){
+        if (ctx.arrayLiteral() != null) {
             imports.setArrayLiteral(visitArrayLiteral(ctx.arrayLiteral()));
         }
         return imports;
@@ -701,8 +695,8 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
 
     @Override
     public Styles visitStylesDeclaration(AngularParser.StylesDeclarationContext ctx) {
-        Styles styles=new Styles();
-        if(ctx.Styles()!=null){
+        Styles styles = new Styles();
+        if (ctx.Styles() != null) {
             styles.setStyle(ctx.Styles().getText());
 
             Row row = new Row();
@@ -711,10 +705,10 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
             this.symbolTable.getRows().add(row);
 
         }
-        if(ctx.Colon()!=null){
+        if (ctx.Colon() != null) {
             styles.setColon(ctx.Colon().getText());
         }
-        if(ctx.arrayLiteral()!=null){
+        if (ctx.arrayLiteral() != null) {
             styles.setArrayLiteral(visitArrayLiteral(ctx.arrayLiteral()));
         }
         return styles;
@@ -722,17 +716,18 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
 
     @Override
     public StyleContent visitSingleExpressionCss(AngularParser.SingleExpressionCssContext ctx) {
-      StyleContent styleContent=new StyleContent();
+        StyleContent styleContent = new StyleContent();
 
-        if(ctx.Identifier()!=null){
+        if (ctx.Identifier() != null) {
 
             styleContent.setClassName(ctx.Identifier().getText());
         }
-        if(ctx.objectLiteral()!=null){
+        if (ctx.objectLiteral() != null) {
             styleContent.setObjectLiteral(visitObjectLiteral(ctx.objectLiteral()));
         }
-      return styleContent;
+        return styleContent;
     }
+
     @Override
     public forStatement visitForstatment(AngularParser.ForstatmentContext ctx) {
         forStatement fs = new forStatement();
@@ -750,13 +745,222 @@ for (int i=0;i<ctx.singleExpression().size();i++) {
 
     @Override
     public IndexArray visitIndexarray(AngularParser.IndexarrayContext ctx) {
-        IndexArray indexArray=new IndexArray();
-       if(ctx.Identifier()!=null){
-           indexArray.setIdentifier(ctx.Identifier().getText());
-       }
-        if(ctx.DecimalLiteral()!=null){
+        IndexArray indexArray = new IndexArray();
+        if (ctx.Identifier() != null) {
+            indexArray.setIdentifier(ctx.Identifier().getText());
+        }
+        if (ctx.DecimalLiteral() != null) {
             indexArray.setIndex(ctx.DecimalLiteral().getChildCount());
         }
-        return  indexArray;
+        return indexArray;
     }
+
+    @Override
+    public NgModuleDeclaration visitNgModuleDeclaration(AngularParser.NgModuleDeclarationContext ctx) {
+        NgModuleDeclaration ngModule = new NgModuleDeclaration();
+
+        String moduleName = ctx.Identifier() != null ? ctx.Identifier().getText() : null;
+        ngModule.setName(moduleName);
+
+        if (moduleName != null) {
+            Row row = new Row();
+            row.setType("NgModule");
+            row.setValue(moduleName);
+            symbolTable.getRows().add(row);
+        }
+
+        String previousModuleName = this.currentModuleName; // حفظ القيمة القديمة
+        this.currentModuleName = moduleName;
+
+        if (ctx.ngModuleAttributes() != null) {
+            ngModule.setAttributes(visitNgModuleAttributes(ctx.ngModuleAttributes()));
+        }
+
+        this.currentModuleName = previousModuleName;
+
+        System.out.println("Processed NgModule: " + ngModule);
+        return ngModule;
+    }
+
+
+    @Override
+    public NgModuleAttributes visitNgModuleAttributes(AngularParser.NgModuleAttributesContext ctx) {
+        NgModuleAttributes ngModuleAttributes = new NgModuleAttributes();
+
+        for (int i = 0; i < ctx.ngModuleAttribute().size(); i++) {
+            if (ctx.ngModuleAttribute(i) != null) {
+                ngModuleAttributes.getAttributes().add(visitNgModuleAttribute(ctx.ngModuleAttribute(i)));
+            }
+
+            }
+
+        return ngModuleAttributes;
+    }
+
+
+    @Override
+    public NgModuleAttribute visitNgModuleAttribute(AngularParser.NgModuleAttributeContext ctx) {
+        NgModuleAttribute ngModuleAttribute = new NgModuleAttribute();
+
+        try {
+            if (ctx.declarationsDeclaration() != null) {
+                DeclarationsDeclaration declarations = visitDeclarationsDeclaration(ctx.declarationsDeclaration());
+                ngModuleAttribute.setDeclarationsDeclaration(declarations);
+
+                // Track declared components in symbol table
+                if (declarations.getArrayLiteral() != null) {
+                    for (Expression expr : declarations.getArrayLiteral().getElements()) {
+                        if (expr.getIdentifier() != null) {
+                            Row row = new Row();
+                            row.setType("DECLARATION");
+                            row.setValue(expr.getIdentifier());
+                            row.setModuleName(currentModuleName); // You'll need to track current module
+                            this.symbolTable.getRows().add(row);
+                        }
+                    }
+                }
+
+            } else if (ctx.importsDeclaration() != null) {
+                Imports imports = visitImportsDeclaration(ctx.importsDeclaration());
+                ngModuleAttribute.setImports(imports);
+
+                // Validate imported modules exist
+                if (imports.getArrayLiteral() != null) {
+                    for (Expression expr : imports.getArrayLiteral().getElements()) {
+                        if (expr.getIdentifier() != null && !symbolTable.hasModule(expr.getIdentifier())) {
+                            symbolTable.addError("Missing module: " + expr.getIdentifier());
+                        }
+                    }
+                }
+
+            } else if (ctx.exportsDeclaration() != null) {
+                ExportsDeclaration exports = visitExportsDeclaration(ctx.exportsDeclaration());
+                ngModuleAttribute.setExportsDeclaration(exports);
+
+                // Track exported components
+                if (exports.getArrayLiteral() != null) {
+                    for (Expression expr : exports.getArrayLiteral().getElements()) {
+                        if (expr.getIdentifier() != null) {
+                            Row row = new Row();
+                            row.setType("EXPORT");
+                            row.setValue(expr.getIdentifier());
+                            row.setModuleName(currentModuleName);
+                            this.symbolTable.getRows().add(row);
+                        }
+                    }
+                }
+
+            } else if (ctx.providersDeclaration() != null) {
+                ProvidersDeclaration providers = visitProvidersDeclaration(ctx.providersDeclaration());
+                ngModuleAttribute.setProvidersDeclaration(providers);
+
+                // Validate providers are injectable
+                if (providers.getArrayLiteral() != null) {
+                    for (Expression expr : providers.getArrayLiteral().getElements()) {
+                        if (expr.getIdentifier() != null && !symbolTable.isInjectable(expr.getIdentifier())) {
+                            symbolTable.addError("Provider must be @Injectable: " + expr.getIdentifier());
+                        }
+                    }
+                }
+
+            } else if (ctx.bootstrapDeclaration() != null) {
+                BootstrapDeclaration bootstrap = visitBootstrapDeclaration(ctx.bootstrapDeclaration());
+                ngModuleAttribute.setBootstrapDeclaration(bootstrap);
+
+                // Validate bootstrap components
+                if (bootstrap.getArrayLiteral() != null) {
+                    for (Expression expr : bootstrap.getArrayLiteral().getElements()) {
+                        if (expr.getIdentifier() != null && !symbolTable.isComponent(expr.getIdentifier())) {
+                            symbolTable.addError("Bootstrap target must be a component: " + expr.getIdentifier());
+                        }
+                    }
+                }
+            }
+
+            return ngModuleAttribute;
+
+        } catch (Exception e) {
+            symbolTable.addError("Invalid NgModule attribute: " + ctx.getText());
+            return ngModuleAttribute; // Return partial data
+        }
+    }
+
+
+    public DeclarationsDeclaration visitDeclarationsDeclaration(AngularParser.DeclarationsDeclarationContext ctx) {
+        DeclarationsDeclaration declarations = new DeclarationsDeclaration();
+        if (ctx.Colon() != null) {
+            declarations.setColon(ctx.Colon().getText());
+        }
+        if (ctx.Declarations() != null) {
+            declarations.setDeclarations(ctx.Declarations().getText());
+
+            Row row = new Row();
+            row.setType("Declaration");
+            row.setValue(ctx.Declarations().getText());
+            this.symbolTable.getRows().add(row);
+        }
+        if (ctx.arrayLiteral() != null) {
+            declarations.setArrayLiteral(visitArrayLiteral(ctx.arrayLiteral()));
+        }
+        return declarations;
+    }
+
+    public ExportsDeclaration visitExportsDeclaration(AngularParser.ExportsDeclarationContext ctx) {
+        ExportsDeclaration exports = new ExportsDeclaration();
+        if (ctx.Colon() != null) {
+            exports.setColon(ctx.Colon().getText());
+        }
+        if (ctx.Exports() != null) {
+            exports.setExports(ctx.Exports().getText());
+
+            Row row = new Row();
+            row.setType("Export");
+            row.setValue(ctx.Exports().getText());
+            this.symbolTable.getRows().add(row);
+        }
+        if (ctx.arrayLiteral() != null) {
+            exports.setArrayLiteral(visitArrayLiteral(ctx.arrayLiteral()));
+        }
+        return exports;
+    }
+
+    public ProvidersDeclaration visitProvidersDeclaration(AngularParser.ProvidersDeclarationContext ctx) {
+        ProvidersDeclaration providers = new ProvidersDeclaration();
+        if (ctx.Colon() != null) {
+            providers.setColon(ctx.Colon().getText());
+        }
+        if (ctx.Providers() != null) {
+            providers.setProviders(ctx.Providers().getText());
+
+            Row row = new Row();
+            row.setType("Provider");
+            row.setValue(ctx.Providers().getText());
+            this.symbolTable.getRows().add(row);
+        }
+        if (ctx.arrayLiteral() != null) {
+            providers.setArrayLiteral(visitArrayLiteral(ctx.arrayLiteral()));
+        }
+        return providers;
+    }
+
+    public BootstrapDeclaration visitBootstrapDeclaration(AngularParser.BootstrapDeclarationContext ctx) {
+        BootstrapDeclaration bootstrap = new BootstrapDeclaration();
+        if (ctx.Colon() != null) {
+            bootstrap.setColon(ctx.Colon().getText());
+        }
+        if (ctx.Bootstrap() != null) {
+            bootstrap.setBootstrap(ctx.Bootstrap().getText());
+
+            Row row = new Row();
+            row.setType("Bootstrap");
+            row.setValue(ctx.Bootstrap().getText());
+            this.symbolTable.getRows().add(row);
+        }
+        if (ctx.arrayLiteral() != null) {
+            bootstrap.setArrayLiteral(visitArrayLiteral(ctx.arrayLiteral()));
+        }
+        return bootstrap;
+    }
+
+
 }

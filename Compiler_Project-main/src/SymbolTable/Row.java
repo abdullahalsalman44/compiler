@@ -5,8 +5,23 @@ public class Row {
     String value;
     String attributeValue;
 
+    String moduleName;
+
+
+    public String getModuleName() {
+        return moduleName;
+    }
+
+
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     public String getType() {
         return type;
+    }
+    public boolean belongsToModule(String module) {
+        return module != null && module.equals(this.moduleName);
     }
 
     public void setType(String type) {

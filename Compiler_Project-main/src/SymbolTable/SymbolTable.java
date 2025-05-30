@@ -5,14 +5,51 @@ import java.util.List;
 
 public class SymbolTable {
     List <Row> rows = new ArrayList<>();
+    private List<String> errors = new ArrayList<>();
 
     public List<Row> getRows() {
         return rows;
     }
 
+
     public void setRows(List<Row> rows) {
         this.rows = rows;
     }
+    public List<String> getErrors() {
+        return errors;
+    }
+
+    public void addError(String error) {
+        errors.add(error);
+    }
+    public boolean hasModule(String moduleName) {
+        for (Row row : rows) {
+            if (row.getValue().equals(moduleName) && row.getType().equals("MODULE")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isInjectable(String name) {
+        for (Row row : rows) {
+            if (row.getValue().equals(name) && row.getType().equals("INJECTABLE")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // تحقق هل العنصر كومبوننت
+    public boolean isComponent(String name) {
+        for (Row row : rows) {
+            if (row.getValue().equals(name) && row.getType().equals("COMPONENT")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 public void printyy() {
     System.out.println("Type\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tValue\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAttValue");
     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");

@@ -2,10 +2,19 @@ package AST;
 
 public  class Statment  {
     FunctionDeclaration functionDeclaration;
+    NgModuleDeclaration ngModuleDeclaration;
     VariableStatement variableStatement;
     ExpressionStatement expressionStatement ;
     ComponentDeclaration componentDeclaration;
     ClassDeclaration classDeclaration;
+    public NgModuleDeclaration getNgModuleDeclaration() {
+        return ngModuleDeclaration;
+    }
+
+    public void setNgModuleDeclaration(NgModuleDeclaration ngModuleDeclaration) {
+        this.ngModuleDeclaration = ngModuleDeclaration;
+    }
+
 
     public ClassDeclaration getClassDeclaration() {
         return classDeclaration;
@@ -49,10 +58,20 @@ public  class Statment  {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (functionDeclaration != null) {
+
+        if (ngModuleDeclaration != null) {
+            sb.append(" NgModuleDeclaration = {").append(ngModuleDeclaration);
+        }
+        else
+
+        {
+
+            sb.append(" NgModuleDeclaration = {");
+        }
+         if (functionDeclaration != null) {
             sb.append(" functionDeclaration=").append(functionDeclaration).append('\n');
         }
-        if (variableStatement != null) {
+         if (variableStatement != null) {
             sb.append(" variableStatement = ").append(variableStatement).append('\n')  ;
         }
         if (expressionStatement != null) {

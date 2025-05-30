@@ -1,4 +1,4 @@
-// Generated from C:/Users/hazem/OneDrive/Desktop/4/compiler_test/CompilerProject/src/antler/AngularParser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/shaza/IdeaProjects/compiler/Compiler_Project-main/src/antler/AngularParser.g4 by ANTLR 4.13.2
 package antler;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -228,6 +228,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitComponentDeclaration(AngularParser.ComponentDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AngularParser#classDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassDeclaration(AngularParser.ClassDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#classDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassDeclaration(AngularParser.ClassDeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#componentAttributes}.
 	 * @param ctx the parse tree
 	 */
@@ -297,16 +307,6 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStylesDeclaration(AngularParser.StylesDeclarationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AngularParser#classDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterClassDeclaration(AngularParser.ClassDeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AngularParser#classDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitClassDeclaration(AngularParser.ClassDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#classBody}.
 	 * @param ctx the parse tree
@@ -447,4 +447,74 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLiteral(AngularParser.LiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#ngModuleDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterNgModuleDeclaration(AngularParser.NgModuleDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#ngModuleDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitNgModuleDeclaration(AngularParser.NgModuleDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#ngModuleAttributes}.
+	 * @param ctx the parse tree
+	 */
+	void enterNgModuleAttributes(AngularParser.NgModuleAttributesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#ngModuleAttributes}.
+	 * @param ctx the parse tree
+	 */
+	void exitNgModuleAttributes(AngularParser.NgModuleAttributesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#ngModuleAttribute}.
+	 * @param ctx the parse tree
+	 */
+	void enterNgModuleAttribute(AngularParser.NgModuleAttributeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#ngModuleAttribute}.
+	 * @param ctx the parse tree
+	 */
+	void exitNgModuleAttribute(AngularParser.NgModuleAttributeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#declarationsDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclarationsDeclaration(AngularParser.DeclarationsDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#declarationsDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclarationsDeclaration(AngularParser.DeclarationsDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#exportsDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportsDeclaration(AngularParser.ExportsDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#exportsDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportsDeclaration(AngularParser.ExportsDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#providersDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterProvidersDeclaration(AngularParser.ProvidersDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#providersDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitProvidersDeclaration(AngularParser.ProvidersDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#bootstrapDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterBootstrapDeclaration(AngularParser.BootstrapDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#bootstrapDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitBootstrapDeclaration(AngularParser.BootstrapDeclarationContext ctx);
 }

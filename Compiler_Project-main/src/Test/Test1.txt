@@ -1,5 +1,25 @@
 import { Component } from '@angular/core';
 import  '@angular/core';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { OtherComponent } from './other.component';
+import { FormsModule } from '@angular/forms';
+import { MyPipe } from './my.pipe';
+import { MyService } from './my.service';
+
+@NgModule({
+  declarations: [AppComponent, OtherComponent, MyPipe],
+  imports: [BrowserModule,FormsModule],
+  exports: [OtherComponent],
+ providers: [
+    MyService
+  ],
+  bootstrap: [AppComponent],
+})
+
+
+export class AppModule { }
 
 @Component({
   standalone: true,
@@ -9,7 +29,7 @@ import  '@angular/core';
                 <div class="product-list">
                   <div
                     class="product"
-                    *ngFor="let product of productsd"
+                    *ngFor="let product of products"
                     [class.selected]="product === selectedProduct"
                     (click)="selectProduct(product)"
                   >

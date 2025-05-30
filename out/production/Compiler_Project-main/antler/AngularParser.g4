@@ -9,20 +9,25 @@ eos : SemiColon? ;
 
 importStatement : (Import importFromBlock)* ;
 importFromBlock
-    : StringLiteral eos
+    :
+          '{' NgModule   '}' moduleItems? From StringLiteral eos
+    |StringLiteral eos
     | Identifier? moduleItems? From StringLiteral eos
     ;
 
 moduleItems
     : '{' (Identifier (Comma Identifier)*)? '}'
     | '{' (Component )? '}'
+    | '{' '}'
     ;
 
 
 statment
     :
-      functionDeclaration
-    | componentDeclaration
+
+     componentDeclaration
+    |   ngModuleDeclaration
+    |   functionDeclaration
     | classDeclaration
     | expressionStatement
     | variableStatement
@@ -55,7 +60,7 @@ variableDeclaration
     : assignable (Assign singleExpression)?
     ;
 
-assignable : arrayLiteral | Identifier | ObjectLiteral ;
+assignable : arrayLiteral | Identifier | objectLiteral ;
 
 singleExpression:
           literal
@@ -111,9 +116,11 @@ statementBlock
     ;
 
 componentDeclaration
-    : At Component '(' componentAttributes ')'
+    : At  Component '(' componentAttributes ')'
     ;
-
+classDeclaration
+    : Export? Class Identifier  classBody
+    ;
 componentAttributes
     : '{' (componentAttribute (',' componentAttribute)* ','?)? '}'
     ;
@@ -134,6 +141,7 @@ standaloneDeclaration
     : Standalone Colon BooleanLiteral
     ;
 
+
 importsDeclaration
     : Imports Colon arrayLiteral
     ;
@@ -147,9 +155,7 @@ stylesDeclaration
     ;
 
 
-classDeclaration
-    : Export? Class Identifier  classBody
-    ;
+
 
 
 classBody
@@ -176,6 +182,8 @@ htmlAttribute
     | directive (Assign htmlAttributeValue)?
     | Class (Assign htmlAttributeValue)?
     |'['Identifier']' (Assign htmlAttributeValue)?
+    | '*' Identifier (Assign htmlAttributeValue)?
+
     ;
 
 mustacheExpression : '{{'  (singleExpression (',' singleExpression)*)?  '}}';
@@ -185,8 +193,9 @@ mustacheExpression : '{{'  (singleExpression (',' singleExpression)*)?  '}}';
 
                      ;
 
-arrayLiteral : '[''`'?  (singleExpression (',' singleExpression)*)?  '`'?']'
-             ;
+arrayLiteral :
+'[' '`'? (singleExpression (',' singleExpression)*)? '`'? ']' ;
+
 indexarray : Identifier '['DecimalLiteral']'
            ;
 arrayCss : '['  '`' (singleExpressionCss)*? '`' ']'
@@ -207,5 +216,28 @@ literal
     | HexColor
     ;
 
+ngModuleDeclaration
+    : At NgModule '(' ngModuleAttributes ')'
+    | At NgModule Identifier '(' ngModuleAttributes ')'
+    ;
+
+ngModuleAttributes
+    : '{' (ngModuleAttribute (',' ngModuleAttribute)* ','?)? '}'
+    ;
 
 
+ngModuleAttribute
+    : declarationsDeclaration
+    | importsDeclaration
+    | exportsDeclaration
+    | providersDeclaration
+    | bootstrapDeclaration
+    ;
+declarationsDeclaration :
+Declarations Colon arrayLiteral ;
+exportsDeclaration      :
+ Exports Colon arrayLiteral ;
+providersDeclaration    :
+Providers Colon arrayLiteral ;
+bootstrapDeclaration    :
+ Bootstrap Colon arrayLiteral ;

@@ -4,6 +4,7 @@ public class ComponentDeclaration {
 
     ComponentAttributes componentAttributes;
 
+
     public ComponentAttributes getComponentAttributes() {
         return componentAttributes;
     }

@@ -31,16 +31,16 @@ public class Standalone {
 
     @Override
     public String toString() {
-  StringBuilder sb=new StringBuilder();
+        StringBuilder sb=new StringBuilder();
 
-  if(standalone!=null){
-      sb.append(standalone);
-  }
+        if(standalone!=null){
+            sb.append(standalone);
+        }
         if(Colon!=null){
             sb.append(Colon);
         }
-            sb.append("{boolean value}=").append(booleanvalue).append("}");
+        sb.append("{boolean value}=").append(booleanvalue).append("}");
 
-  return sb.toString();
+        return sb.toString();
     }
 }
