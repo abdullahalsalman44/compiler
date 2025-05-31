@@ -24,7 +24,7 @@ public class SymbolTable {
     }
     public boolean hasModule(String moduleName) {
         for (Row row : rows) {
-            if (row.getValue().equals(moduleName) && row.getType().equals("MODULE")) {
+            if (row.getName().equals(moduleName) && row.getType().equals("MODULE")) {
                 return true;
             }
         }
@@ -33,33 +33,48 @@ public class SymbolTable {
 
     public boolean isInjectable(String name) {
         for (Row row : rows) {
-            if (row.getValue().equals(name) && row.getType().equals("INJECTABLE")) {
+            if (row.getName().equals(name) && row.getType().equals("INJECTABLE")) {
                 return true;
             }
         }
         return false;
     }
 
-    // تحقق هل العنصر كومبوننت
     public boolean isComponent(String name) {
         for (Row row : rows) {
-            if (row.getValue().equals(name) && row.getType().equals("COMPONENT")) {
+            if (row.getName().equals(name) && row.getType().equals("COMPONENT")) {
                 return true;
             }
         }
         return false;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public void printyy() {
-    System.out.println("Type\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tValue\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAttValue");
+    System.out.println("Type\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tName\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tValue");
     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
 
 
     for (int i = 0; i < rows.size(); i++) {
         if (rows.get(i) != null) {
             String type = rows.get(i).getType();
-            String value = rows.get(i).getValue();
-            String attributeValue = rows.get(i).getAttributeValue();
+            String value = rows.get(i).getName();
+            String attributeValue = rows.get(i).getValue();
 
             // Adjust the formatting based on the length of type and value
             String formattedType = String.format("%-20s", type);

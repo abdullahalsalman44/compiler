@@ -15,18 +15,16 @@ public class NgModuleAttributes {
     }
 
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" NgModule Body = { ");
+        sb.append("- Attributes:\n");
         if (ngModuleAttribute != null) {
-            for (NgModuleAttribute b : ngModuleAttribute) {
-                if (b != null) {
-                    sb.append(b).append(",");
-                }
-
+            for (NgModuleAttribute attr : ngModuleAttribute) {
+                sb.append(attr.toString());
             }
         }
-        sb.append("}").append('\n');
         return sb.toString();
     }
 }
+

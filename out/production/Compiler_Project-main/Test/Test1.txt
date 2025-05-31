@@ -8,6 +8,18 @@ import { FormsModule } from '@angular/forms';
 import { MyPipe } from './my.pipe';
 import { MyService } from './my.service';
 
+//import { Injectable } from '@angular/core';
+
+/*
+export class BrowserModule { }
+export class FormsModule { }
+
+@Injectable()
+export class MyService {
+  constructor() { }
+  // Service logic here
+}
+*/
 @NgModule({
   declarations: [AppComponent, OtherComponent, MyPipe],
   imports: [BrowserModule,FormsModule],
@@ -21,6 +33,37 @@ import { MyService } from './my.service';
 
 export class AppModule { }
 
+
+
+/*
+@Component({
+  selector: 'app-root',
+  template: `<h1>Hello Angular!</h1>`
+})
+export class AppComponent { }
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'myPipe'
+})
+export class MyPipe implements PipeTransform {
+  transform(value: string): string {
+    return value.toUpperCase();  // Example logic
+  }
+}
+
+export class BrowserModule { }
+export class FormsModule { }
+
+@Injectable()
+export class MyService {
+  constructor() { }
+  // Service logic here
+}
+*/
+/*
 @Component({
   standalone: true,
   selector: 'app-root',
@@ -275,3 +318,4 @@ this.selectedProduct = product;
 
 export class AppComponent{
 }
+*/

@@ -28,21 +28,29 @@ public class BootstrapDeclaration {
     public void setArrayLiteral(ArrayLiteral arrayLiteral) {
         this.arrayLiteral = arrayLiteral;
     }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
-        if (bootstrap != null) {
-            sb.append(bootstrap);
-        }
-        if (Colon != null) {
-            sb.append(Colon);
-        }
         if (arrayLiteral != null) {
-            sb.append(arrayLiteral);
+            // Remove the declarations/imports/exports label here
+            // Just return the array literal content
+            sb.append(arrayLiteral.toString());
         }
-
-        return sb.toString();
-    }
-}
+        return sb.toString();}}
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        if (bootstrap != null) {
+//            sb.append(bootstrap);
+//        }
+//        if (Colon != null) {
+//            sb.append(Colon);
+//        }
+//        if (arrayLiteral != null) {
+//            sb.append(arrayLiteral);
+//        }
+//
+//        return sb.toString();
+//    }
+//}

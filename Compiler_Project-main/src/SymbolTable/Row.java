@@ -2,10 +2,11 @@ package SymbolTable;
 
 public class Row {
     String type;
+    String name;
     String value;
-    String attributeValue;
 
     String moduleName;
+
 
 
     public String getModuleName() {
@@ -20,27 +21,25 @@ public class Row {
     public String getType() {
         return type;
     }
-    public boolean belongsToModule(String module) {
-        return module != null && module.equals(this.moduleName);
-    }
+
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setAttributeValue(String attributeValue) {
-        this.attributeValue = attributeValue;
-    }
-
-    public String getAttributeValue() {
-        return attributeValue;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setName(String name) {
+        this.name = name;
     }
 }
