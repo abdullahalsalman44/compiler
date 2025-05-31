@@ -362,7 +362,6 @@ public class visitor extends AngularParserBaseVisitor {
         if (ctx.singleExpression().size() == 2 && ctx.Assign() != null) {
             Expression left = visitSingleExpression(ctx.singleExpression(0));
             Expression right = visitSingleExpression(ctx.singleExpression(1));
-
             expression.setLeft(left);
             expression.setRight(right);
 
@@ -370,11 +369,25 @@ public class visitor extends AngularParserBaseVisitor {
             String type = "";
             String value = right.toString();
 
-            if (ctx.singleExpression(1).arrayLiteral() != null) {
+            if (left.getIdentifier() != null && ctx.singleExpression(1).arrayLiteral() ==null){
+                int counter = 0;
+                for(Row row : this.symbolTable.getRows()){
+                    if("NameOfVar".equals(row.getType())){
+                        counter++;
+                    }
+                }
+
+                if(counter == 0){
+                    Row row = new Row();
+                    row.setType("UnKnow");
+                    row.setValue(left.getIdentifier());
+                    this.symbolTable.getRows().add(row);
+                }
+
+            }else if (ctx.singleExpression(1).arrayLiteral() != null) {
                 type = "array";
                 value = ctx.singleExpression(1).getText();
                 expression.setArrayAssignment(true);
-//                System.out.println("Detected array assignment to: " + varName);
 
                 Row row = new Row();
                 row.setType(type);
@@ -387,6 +400,7 @@ public class visitor extends AngularParserBaseVisitor {
                 type = "identifier";
                 value = right.getIdentifier();
             }
+
 
 
             return expression;
