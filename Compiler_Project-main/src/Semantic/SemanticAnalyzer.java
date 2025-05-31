@@ -50,7 +50,7 @@ public class SemanticAnalyzer {
             }
         }
 
-
+        checkIfVariableUnKnow();
     }
 
     public boolean  checkSelectoreExists(){
@@ -103,4 +103,20 @@ public class SemanticAnalyzer {
                 }
         return !duplicatedSelectors.isEmpty();
     }
+
+
+    public void checkIfVariableUnKnow(){
+        List <String> notResolvedVariables = new ArrayList<>();
+        for (Row row : symbolTable.getRows()){
+            if("UnKnow".equals(row.getType())){
+                notResolvedVariables.add(row.getValue());
+            }
+        }
+        if(!notResolvedVariables.isEmpty()){
+            for (String notResolvedVariable : notResolvedVariables) {
+                System.err.println("Semantic Error: Cannot resolve symbol " + notResolvedVariable);
+            }
+        }
+    }
+}
 }
