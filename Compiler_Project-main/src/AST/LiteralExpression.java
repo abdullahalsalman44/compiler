@@ -15,6 +15,17 @@ LiteralExpression {
         return NullLiteral;
     }
 
+    public String getValue() {
+        if (NullLiteral != null) {
+            return NullLiteral;
+        } else if (StringLiteral != null) {
+            return StringLiteral;
+        } else if (BooleanLiteral) {
+            return String.valueOf(BooleanLiteral);
+        } else {
+            return String.valueOf(DecimalLiteral);
+        }
+    }
 
     public String getStringLiteral() {
         return StringLiteral;

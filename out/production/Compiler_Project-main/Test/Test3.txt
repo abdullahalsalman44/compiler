@@ -1,0 +1,61 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-product-list',
+  template: `
+    <div class="container">
+      <div class="product-list">
+        <div class="product" *ngFor="let product of products" (click)="selectProduct(product)">
+          <h4>{{ product.name }}</h4>
+          <img [src]="product.image" alt="Product Image" class="product-image" />
+        </div>
+      </div>
+      <div class="product-detail" *ngIf="selectedProduct">
+        <h3>{{ selectedProduct.name }}</h3>
+        <img [src]="selectedProduct.image" alt="Product Image" class="detail-image" />
+        <p>{{ selectedProduct.details }}</p>
+      </div>
+    </div>
+  `,
+  styles: [`
+    .container {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+    .product-list {
+      flex: 1;
+    }
+    .product {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .product-detail {
+      flex: 2;
+      padding: 20px;
+      border: 1px solid #007bff;
+    }
+  `]
+})
+export class ProductListComponent {
+  products = [
+    {
+      name: "منتج 2",
+      image: "https://via.placeholder.com/300x200/28a745/ffffff?text=Product+2", 
+      details: "تفاصيل المنتج الثاني"
+    },
+    {
+      name: "منتج 3",
+      image: "https://via.placeholder.com/300x200/dc3545/ffffff?text=Product+3",
+      details: "تفاصيل المنتج الثالث"
+    }
+  ];
+
+  selectedProduct = this.products[0];
+
+  selectProduct(product) {
+    this.selectedProduct = product;
+  }
+} 

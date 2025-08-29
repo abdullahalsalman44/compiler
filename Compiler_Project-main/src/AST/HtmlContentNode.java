@@ -12,12 +12,29 @@ public class HtmlContentNode  {
     }
     MustachExpression mustachExpression;
 
+
     public MustachExpression getMustachExpression() {
         return mustachExpression;
     }
 
+    public NgIfExpression getNgIfExpression() {
+        return null;
+    }
+
     public void setMustachExpression(MustachExpression mustachExpression) {
         this.mustachExpression = mustachExpression;
+    }
+
+    public NgForExpression getNgForExpression() {
+        // سيتم تنفيذ هذا لاحقاً
+        return null;
+    }
+
+    public String getText() {
+        if (expContent != null && !expContent.isEmpty()) {
+            return expContent.get(0).toString();
+        }
+        return null;
     }
 
     public void setExpContent(List<Expression> expContent) {

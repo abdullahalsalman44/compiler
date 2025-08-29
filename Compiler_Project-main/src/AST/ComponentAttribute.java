@@ -49,6 +49,21 @@ public class ComponentAttribute {
         this.styles = styles;
     }
 
+    public String getName() {
+        if (selector != null) {
+            return "selector";
+        } else if (standalone != null) {
+            return "standalone";
+        } else if (imports != null) {
+            return "imports";
+        } else if (template != null) {
+            return "template";
+        } else if (styles != null) {
+            return "styles";
+        }
+        return "";
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -9,6 +9,18 @@ public class HtmlElementNode  {
      List<HtmlAttributeNode> attributes = new ArrayList<HtmlAttributeNode>();
      HtmlContentNode content;
 
+    public List<HtmlAttributeNode> getHtmlAttributes() {
+        return attributes;
+    }
+
+    public List<HtmlContentNode> getHtmlContent() {
+        List<HtmlContentNode> contentList = new ArrayList<>();
+        if (content != null) {
+            contentList.add(content);
+        }
+        return contentList;
+    }
+
     public String getTagName() {
         return tagName;
     }

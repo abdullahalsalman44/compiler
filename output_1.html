@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular Component Preview</title>
+    <style>
+        /* أنماط CSS أساسية - ستتم استبدالها */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 300px;
+        }
+        
+        /* الأنماط الأساسية للمنتج - ستتم استبدالها بالأنماط من ملف الاختبار */
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .product:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+        
+        .product.selected {
+            border-color: #007bff;
+            background-color: #f8f9ff;
+        }
+        
+        .product-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .product-detail {
+            flex: 2;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            min-width: 400px;
+        }
+        
+        .detail-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        h4 {
+            margin: 0 0 10px 0;
+            color: #555;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <div class="product-list">
+                <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+            </div>
+            <div class="product-detail">
+                <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+            </div>
+        </div>
+    <script>
+        const products = [
+        ];
+        let selectedProduct = products[0];
+        
+        function selectProduct(product) {
+            selectedProduct = product;
+            renderProducts();
+            renderProductDetail();
+        }
+        
+        function renderProducts() {
+            const container = document.querySelector('.product-list');
+            if (!container) return;
+            container.innerHTML = '';
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                if (product === selectedProduct) {
+                    productDiv.classList.add('selected');
+                }
+                productDiv.onclick = () => selectProduct(product);
+                productDiv.innerHTML = `
+                    <h4>${product.name}</h4>
+                    <img src="${product.image}" alt="Product Image" class="product-image" />
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+        
+        function renderProductDetail() {
+            const detailContainer = document.querySelector('.product-detail');
+            if (!detailContainer || !selectedProduct) return;
+            detailContainer.innerHTML = `
+                <h3>${selectedProduct.name}</h3>
+                <img src="${selectedProduct.image}" alt="Product Image" class="detail-image" />
+                <p>${selectedProduct.details}</p>
+            `;
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            renderProductDetail();
+        });
+    </script>
+</body>
+</html>

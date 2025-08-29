@@ -24,11 +24,18 @@ public class StyleContent {
         this.objectLiteral = objectLiteral;
     }
 
+    public String getCssContent() {
+        if (objectLiteral != null) {
+            return objectLiteral.toString();
+        }
+        return "";
+    }
+
 
     @Override
     public String toString() {
-     StringBuilder sb=new StringBuilder();
-     sb.append("{class Css }").append("\n");
+        StringBuilder sb=new StringBuilder();
+        sb.append("{class Css }").append("\n");
 
         if(className!=null){
             sb.append("{class name}").append(className);
@@ -37,6 +44,6 @@ public class StyleContent {
             sb.append(objectLiteral);
         }
 
-     return sb.toString();
+        return sb.toString();
     }
 }

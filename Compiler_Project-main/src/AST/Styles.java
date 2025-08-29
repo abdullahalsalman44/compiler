@@ -6,7 +6,7 @@ import java.util.List;
 public class Styles {
     String style;
     String Colon;
-ArrayLiteral arrayLiteral;
+    ArrayLiteral arrayLiteral;
 
     public String getStyle() {
         return style;
@@ -32,6 +32,11 @@ ArrayLiteral arrayLiteral;
         this.arrayLiteral = arrayLiteral;
     }
 
+    public List<StyleContent> getStyleContent() {
+        // سيتم تنفيذ هذا لاحقاً
+        return new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb=new StringBuilder();
@@ -44,6 +49,6 @@ ArrayLiteral arrayLiteral;
         if(arrayLiteral!=null){
             sb.append(arrayLiteral);
         }
-      return   sb.toString();
+        return   sb.toString();
     }
 }

@@ -25,7 +25,12 @@ public class MustachExpression {
         OpenBrac = openBrac;
     }
 
-
+    public Expression getExpression() {
+        if (expContent != null && !expContent.isEmpty()) {
+            return expContent.get(0);
+        }
+        return null;
+    }
 
     public String getCloseBrac() {
         return CloseBrac;

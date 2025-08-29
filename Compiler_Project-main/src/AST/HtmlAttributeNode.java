@@ -17,6 +17,13 @@ public class HtmlAttributeNode  {
         return directive;
     }
 
+    public HtmlAttributeValueNode getHtmlAttributeValue() {
+        return attributeValue;
+    }
+
+    public String getName() {
+        return attributeName;
+    }
 
     public List<Expression> getExpressions() {
         return expressions;

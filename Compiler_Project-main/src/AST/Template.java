@@ -15,6 +15,7 @@ public class Template {
         this.htmlElementsNode = htmlElementsNode;
     }
 
+
     public String getBackTick2() {
         return BackTick2;
     }
@@ -23,6 +24,9 @@ public class Template {
         BackTick2 = backTick2;
     }
 
+    public HtmlElementsNode getHtmlElements() {
+        return htmlElementsNode;
+    }
 
 
     public String getTemplate() {

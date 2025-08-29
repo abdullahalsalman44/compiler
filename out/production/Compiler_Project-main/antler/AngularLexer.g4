@@ -1,5 +1,3 @@
-
-
 lexer grammar AngularLexer;
 
 MultiLineComment  : '/*' .*? '*/'             -> channel(HIDDEN);

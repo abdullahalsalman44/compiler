@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular Component Preview</title>
+    <style>
+        /* أنماط CSS أساسية - ستتم استبدالها */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 300px;
+        }
+        
+        /* الأنماط الأساسية للمنتج - ستتم استبدالها بالأنماط من ملف الاختبار */
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .product:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+        
+        .product.selected {
+            border-color: #007bff;
+            background-color: #f8f9ff;
+        }
+        
+        .product-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .product-detail {
+            flex: 2;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            min-width: 400px;
+        }
+        
+        .detail-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        h4 {
+            margin: 0 0 10px 0;
+            color: #555;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <div class="product-list">
+                <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+            </div>
+            <div class="product-detail">
+                <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+            </div>
+        </div>
+    <script>
+        // معالج standalone
+        // مكون مستقل
+        // معالج selector: selector:{selector name}'app-root' ,
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const component = document.querySelector('selector:{selector name}'app-root' ,
+');
+            if (component) {
+                console.log('تم العثور على المكون: selector:{selector name}'app-root' ,
+');
+            }
+        });
+        // معالج imports
+        // استيراد الوحدات المطلوبة
+        // معالج template
+        function renderTemplate() {
+            // سيتم تنفيذ القالب هنا
+        }
+        // معالج styles
+        function applyStyles() {
+            // تطبيق الأنماط
+        }
+        // معالج standalone
+        // مكون مستقل
+        // معالج selector: selector:{selector name}'app-root' ,
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const component = document.querySelector('selector:{selector name}'app-root' ,
+');
+            if (component) {
+                console.log('تم العثور على المكون: selector:{selector name}'app-root' ,
+');
+            }
+        });
+        // معالج imports
+        // استيراد الوحدات المطلوبة
+        // معالج template
+        function renderTemplate() {
+            // سيتم تنفيذ القالب هنا
+        }
+        // معالج styles
+        function applyStyles() {
+            // تطبيق الأنماط
+        }
+        const products = [
+            { name: 'Product 1', image: 'https://media.istockphoto.com/id/2174290339/nl/foto/neural-network-nodes-deep-learning-artificial-intelligence-machine-learning-model.jpg?s=1024x1024&w=is&k=20&c=54EHvVjklD4CTzZKb9XXSw4-28sxuqlexAjr_eTts_o=', details: 'Visual Elements:A large web of interconnected nodes, possibly symbolizing data points or user connections.A glowing, tech-inspired color palette, featuring blues and purples.Icons or symbols of cloud computing, AI, or IoT.Layers of abstract design to convey depth and complexity in data or technology.Potential Use Cases:Technology presentations or discussions about cloud computing, AI, or IoT.Marketing material for software, IT services, or tech solutions.' },
+            { name: 'Product 2', image: 'https://media.istockphoto.com/id/1132150631/nl/foto/social-media-platform-informatietechnologie-big-data-cloud-computing-ai-iot.jpg?s=1024x1024&w=is&k=20&c=sOhZ_4hJpdx9FxuEqEp5R-D43aX22-1cJ5TZqrgw31g=', details: 'Theme: Online Dating and Social Media NetworkingVisuals:Displays a conceptual design of connected icons forming a network.Includes symbols representing relationships, social interaction, and messaging (e.g., hearts, people, chat bubbles).' },
+            { name: 'Product 3', image: 'https://media.istockphoto.com/id/1894107670/nl/foto/electricity.jpg?s=612x612&w=0&k=20&c=R_9ENN2UEe8bqUgAiHfgynoAhO1jBEk9Kgc9J_WKwhQ=', details: 'Theme: Electricity/PowerVisualsDepicts a glowing light bulb surrounded by electric currents or sparks of energy.The background is dark, enhancing the vibrant blue and white electric arcs.Symbolizes innovation, energy, or the concept of power and electricity.' }
+        ];
+        let selectedProduct = products[0];
+        
+        function selectProduct(product) {
+            selectedProduct = product;
+            renderProducts();
+            renderProductDetail();
+        }
+        
+        function renderProducts() {
+            const container = document.querySelector('.product-list');
+            if (!container) return;
+            container.innerHTML = '';
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                if (product === selectedProduct) {
+                    productDiv.classList.add('selected');
+                }
+                productDiv.onclick = () => selectProduct(product);
+                productDiv.innerHTML = `
+                    <h4>${product.name}</h4>
+                    <img src="${product.image}" alt="Product Image" class="product-image" />
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+        
+        function renderProductDetail() {
+            const detailContainer = document.querySelector('.product-detail');
+            if (!detailContainer || !selectedProduct) return;
+            detailContainer.innerHTML = `
+                <h3>${selectedProduct.name}</h3>
+                <img src="${selectedProduct.image}" alt="Product Image" class="detail-image" />
+                <p>${selectedProduct.details}</p>
+            `;
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            renderProductDetail();
+        });
+    </script>
+</body>
+</html>

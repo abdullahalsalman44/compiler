@@ -15,6 +15,10 @@ public class ComponentAttributes {
         this.componentAttribute = componentAttribute;
     }
 
+    public List<ComponentAttribute> getComponentAttributes() {
+        return componentAttribute;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

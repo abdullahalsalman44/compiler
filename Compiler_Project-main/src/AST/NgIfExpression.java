@@ -3,6 +3,7 @@ package AST;
 public class NgIfExpression {
     String varmod;
     String of;
+    private Expression condition;
 
     public void setVarmod(String varmod) {
         this.varmod = varmod;
@@ -18,6 +19,14 @@ public class NgIfExpression {
 
     public String getOf() {
         return of;
+    }
+
+    public Expression getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Expression condition) {
+        this.condition = condition;
     }
 
     @Override
