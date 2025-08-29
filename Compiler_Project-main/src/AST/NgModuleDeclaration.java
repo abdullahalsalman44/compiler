@@ -4,7 +4,6 @@ public class NgModuleDeclaration {
 
 
     NgModuleAttributes ngModuleAttributes;
-
     private String name;
 
     public String getName() {
@@ -24,14 +23,15 @@ public class NgModuleDeclaration {
         this.ngModuleAttributes = attributes;
     }
 
-    @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("NgModuleDeclaration");
-        if (name != null) sb.append(" ").append(name);
-        if (ngModuleAttributes != null) sb.append(" ").append(ngModuleAttributes);
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append("- Name: ").append(name != null ? name : "anonymous").append("\n");
+        if (ngModuleAttributes != null) {
+            sb.append(ngModuleAttributes.toString());
+        }
         return sb.toString();
     }
-
 
 }
 

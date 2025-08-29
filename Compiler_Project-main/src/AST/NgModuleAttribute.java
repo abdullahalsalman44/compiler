@@ -48,24 +48,26 @@ public class NgModuleAttribute {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("NgModuleAttributes {");
-        if (imports != null)
-            sb.append("imports Declaration= {").append(imports);
-
-        if (declarationsDeclaration != null)
-            sb.append("declarations ={").append(declarationsDeclaration);
-
-        if (exportsDeclaration != null)
-            sb.append("exports Declaration= {").append(exportsDeclaration);
-        if (providersDeclaration != null)
-            sb.append("providers Declaration ={").append(providersDeclaration);
-        sb.append("}");
-        if (bootstrapDeclaration != null)
-            sb.append("bootstrap Declaration ={").append(bootstrapDeclaration);
-        sb.append("i am in ngmod atttteeee");
+        if (declarationsDeclaration != null) {
+            sb.append("  * declarations: \n").append(declarationsDeclaration.toString());
+        }
+        if (imports != null) {
+            sb.append("  * imports: \n").append(imports.toString());
+        }
+        if (exportsDeclaration != null) {
+            sb.append("  * exports: \n").append(exportsDeclaration.toString());
+        }
+        if (providersDeclaration != null) {
+            sb.append("  * providers: \n").append(providersDeclaration.toString());
+        }
+        if (bootstrapDeclaration != null) {
+            sb.append("  * bootstrap: \n").append(bootstrapDeclaration.toString());
+        }
         return sb.toString();
     }
 }
+
+
 
 
 

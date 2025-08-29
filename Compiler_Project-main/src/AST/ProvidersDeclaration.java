@@ -28,22 +28,32 @@ public class ProvidersDeclaration {
     public void setArrayLiteral(ArrayLiteral arrayLiteral) {
         this.arrayLiteral = arrayLiteral;
     }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
-        if (providers != null) {
-            sb.append(providers);
-        }
-        if (Colon != null) {
-            sb.append(Colon);
-        }
         if (arrayLiteral != null) {
-            sb.append(arrayLiteral);
+            // Remove the declarations/imports/exports label here
+            // Just return the array literal content
+            sb.append(arrayLiteral.toString());
         }
-        sb.append("i am in poovedddd");
+        return sb.toString();}}
 
-        return sb.toString();
-    }
-}
+    //
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        if (providers != null) {
+//            sb.append(providers);
+//        }
+//        if (Colon != null) {
+//            sb.append(Colon);
+//        }
+//        if (arrayLiteral != null) {
+//            sb.append(arrayLiteral);
+//        }
+//       // sb.append("}");
+//
+//        return sb.toString();
+//    }
+//}

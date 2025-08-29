@@ -49,8 +49,37 @@ public class SymbolTable {
         return false;
     }
 
+<<<<<<< HEAD
 
 
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public void printyy() {
+    System.out.println("Type\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tName\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tValue");
+    System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+
+
+    for (int i = 0; i < rows.size(); i++) {
+        if (rows.get(i) != null) {
+            String type = rows.get(i).getType();
+            String value = rows.get(i).getName();
+            String attributeValue = rows.get(i).getValue();
+>>>>>>> 77b6bd24897e9d08bec92ae4079c7c1381b8f9e6
 
 
 

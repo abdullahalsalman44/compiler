@@ -31,20 +31,11 @@ public class Imports {
 
     @Override
     public String toString() {
-     StringBuilder sb=new StringBuilder();
-
-     if(imports!=null){
-         sb.append(imports);
-     }
-        if(Colon!=null){
-            sb.append(Colon);
+        StringBuilder sb = new StringBuilder();
+        if (arrayLiteral != null) {
+            // Remove the declarations/imports/exports label here
+            // Just return the array literal content
+            sb.append(arrayLiteral.toString());
         }
-        if(arrayLiteral!=null){
-            sb.append(arrayLiteral);
-        }
-
-
-
-     return sb.toString();
-    }
-}
+        return sb.toString();
+    }}

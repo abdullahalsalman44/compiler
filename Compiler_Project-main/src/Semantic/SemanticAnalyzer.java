@@ -16,6 +16,7 @@ public class SemanticAnalyzer {
 
     public void analyze() {
         List<Row> rows = symbolTable.getRows();
+<<<<<<< HEAD
         Set<String> classNames = new HashSet<>();
         Set<String> duplicates = new HashSet<>();
         for (Row row : rows) {
@@ -23,6 +24,18 @@ public class SemanticAnalyzer {
                 String className = row.getName();
                 if (!classNames.add(className)) {
                     duplicates.add(className);
+=======
+
+            Set<String> classNames = new HashSet<>();
+            Set<String> duplicates = new HashSet<>();
+
+            for (Row row : rows) {
+                if ("ClassName".equals(row.getType())) {
+                    String className = row.getName();
+                    if (!classNames.add(className)) {
+                         duplicates.add(className);
+                    }
+>>>>>>> 77b6bd24897e9d08bec92ae4079c7c1381b8f9e6
                 }
             }
         }
@@ -39,9 +52,50 @@ public class SemanticAnalyzer {
             if("Selector".equals(row.getType())){
                 if(checkSelectorDuplication(row))
                     System.err.println("Semantic Error: Duplicate selector definition '" + row.getValue() + "'");
+<<<<<<< HEAD
             }
         }
         checkExportsAreDeclared();
+    }
+    private void checkExportsAreDeclared() {
+        // Map to track module declarations and exports
+        Map<String, Set<String>> moduleDeclarations = new HashMap<>();
+        Map<String, Set<String>> moduleExports = new HashMap<>();
+
+        // First pass: collect all declarations and exports
+        for (Row row : symbolTable.getRows()) {
+            if (row.getType().equals("DECLARATION") && row.getModuleName() != null) {
+                moduleDeclarations
+                        .computeIfAbsent(row.getModuleName(), k -> new HashSet<>())
+                        .add(row.getName());
+            } else if (row.getType().equals("EXPORT") && row.getModuleName() != null) {
+                moduleExports
+                        .computeIfAbsent(row.getModuleName(), k -> new HashSet<>())
+                        .add(row.getName());
+=======
+>>>>>>> 77b6bd24897e9d08bec92ae4079c7c1381b8f9e6
+            }
+        }
+
+        // Second pass: verify exports are declared
+        for (Map.Entry<String, Set<String>> entry : moduleExports.entrySet()) {
+            String moduleName = entry.getKey();
+            Set<String> exports = entry.getValue();
+            Set<String> declarations = moduleDeclarations.getOrDefault(moduleName, new HashSet<>());
+
+<<<<<<< HEAD
+            for (String export : exports) {
+                if (!declarations.contains(export)) {
+                    System.err.println("Semantic Error: Export '" + export +
+                            "' is not declared in NgModule '" + moduleName + "'");
+                }
+            }
+        }
+    }
+=======
+        checkExportsAreDeclared();
+
+
     }
     private void checkExportsAreDeclared() {
         // Map to track module declarations and exports
@@ -75,6 +129,7 @@ public class SemanticAnalyzer {
             }
         }
     }
+>>>>>>> 77b6bd24897e9d08bec92ae4079c7c1381b8f9e6
     public boolean  checkSelectoreExists(){
         int selectorCounters = 0 ;
 
@@ -119,10 +174,17 @@ public class SemanticAnalyzer {
     }
 
     public  boolean checkSelectorDuplication(Row row) {
+<<<<<<< HEAD
         String selectorValue = row.getValue();
         if (!selectors.add(selectorValue)) {
             duplicatedSelectors.add(selectorValue);
         }
+=======
+                String selectorValue = row.getValue();
+                if (!selectors.add(selectorValue)) {
+                    duplicatedSelectors.add(selectorValue);
+                }
+>>>>>>> 77b6bd24897e9d08bec92ae4079c7c1381b8f9e6
         return !duplicatedSelectors.isEmpty();
     }
 }
